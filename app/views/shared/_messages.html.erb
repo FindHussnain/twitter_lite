@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-8 col-xs-offset-2">
+  <% flash.each do |key, value| %>
+    <div class="alert <%= bootstrap_class_for(key.to_s.sub('_stay', '')) %> alert-dismissible show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <% if value.is_a?(Array) %>
+        <ul>
+          <% value.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <%= raw value %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+</div>

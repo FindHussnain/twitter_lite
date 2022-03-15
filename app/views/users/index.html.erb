@@ -1,0 +1,22 @@
+<div data-controller="confirmation">
+  <h1 align="center">All Users</h1>
+  <div align="center">
+    <% @users.each do |user| %>
+      <ul class="listing">
+        <div class="row">
+          <div class="well col-md-4 col-md-offset-4">
+            <li><%= link_to gravatar_for(user), user_path(user) %></li>
+            <li class="article-title"><%= link_to user.username, user_path(user) %><%="(#{user.roles.pluck(:name).join(", ")})" if !user.roles.blank? %></li>
+
+            <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
+            <% if logged_in? && (current_user == user || current_user.has_role?(:admin)) %>
+            <li><%= button_to "Destroy", user_path(user),method: :delete, data: { action: 'click->confirmation#confirm' } %></li>
+            <li><%= link_to "Edit", edit_user_path(user) %></li>
+            <% end %>
+          </div>
+        </div>
+      </ul>
+    <% end %>
+    <%= pagy_bootstrap_nav(@pagy).html_safe %>
+  </div>
+</div>
