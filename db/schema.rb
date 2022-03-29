@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_11_202712) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_26_094955) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -28,6 +28,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_11_202712) do
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.string "followable_type", null: false
+    t.integer "followable_id", null: false
+    t.string "follower_type", null: false
+    t.integer "follower_id", null: false
+    t.boolean "blocked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followable_id", "followable_type"], name: "fk_followables"
+    t.index ["followable_type", "followable_id"], name: "index_follows_on_followable"
+    t.index ["follower_id", "follower_type"], name: "fk_follows"
+    t.index ["follower_type", "follower_id"], name: "index_follows_on_follower"
   end
 
   create_table "notifications", force: :cascade do |t|

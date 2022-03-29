@@ -75,3 +75,4 @@ gem 'jquery-rails'
 gem 'rolify', '~> 6.0'
 gem "noticed", "~> 1.5"
 gem 'acts-as-taggable-on', '~> 9.0', '>= 9.0.1'
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
