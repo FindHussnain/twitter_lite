@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :destroy, :show, :update]
+  before_action :set_user, only: [:edit, :destroy, :show, :update, :follow, :unfollow]
   before_action :authenticate_user, only: [:edit, :update, :destroy]
   before_action only: [:destroy, :edit, :update] do
     authorize_user(@user)
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @user_articles = pagy(Article.all)
+    @pagy, @user_articles = pagy(@user.articles.all)
   end
 
   def index
@@ -52,6 +52,17 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "You are not elligible for this"
     end
+  end
+
+  def follow
+    @current_user.follow(@user)
+    @follow = Follow.find_by(follower: @current_user, followable: @user)
+    redirect_to request.referer
+  end
+
+  def unfollow
+    @current_user.stop_following(@user)
+    redirect_to request.referer
   end
 
   private

@@ -11,6 +11,13 @@
             <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
             <% if logged_in? && (current_user == user || current_user.has_role?(:admin)) %>
             <li><%= button_to "Destroy", user_path(user),method: :delete, data: { action: 'click->confirmation#confirm' } %></li>
+            <li>
+           <% if @current_user.following?(user) %>
+              <center><%= button_to "following", unfollow_user_path(user), class: 'btn btn-danger' %></center>
+            <% elsif @current_user != user %>
+              <center><%= button_to "follow", follow_user_path(user), class: 'btn btn-success' %></center>
+           <% end %>
+            </li>
             <li><%= button_to "Edit", edit_user_path(user) %></li>
             <% end %>
           </div>

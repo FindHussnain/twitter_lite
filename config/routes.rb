@@ -8,7 +8,12 @@ Rails.application.routes.draw do
     end
   end
   get 'signup', to: 'users#new'
-  resources :users, except: [:new]
+  resources :users, except: [:new] do
+    member do
+      post :follow
+      post :unfollow
+    end
+  end
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'

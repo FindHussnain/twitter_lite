@@ -11,6 +11,8 @@ class User < ApplicationRecord
   before_save { self.email = email.downcase }
   has_secure_password
   acts_as_voter
+  acts_as_followable
+  acts_as_follower
   def assign_default_role
     self.add_role :visitor if self.roles.blank?
   end
