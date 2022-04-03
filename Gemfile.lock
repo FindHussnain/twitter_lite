@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     acts-as-taggable-on (9.0.1)
       activerecord (>= 6.0, < 7.1)
+    acts_as_votable (0.13.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     autoprefixer-rails (10.4.2.0)
@@ -266,6 +267,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 9.0, >= 9.0.1)
+  acts_as_votable
   bcrypt (~> 3.1.7)
   bootsnap
   bootstrap-sass (~> 3.4, >= 3.4.1)

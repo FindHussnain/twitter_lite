@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:edit, :show, :update, :destroy]
-  before_action :authenticate_user, only:[:new, :create, :edit, :update, :destroy]
+  before_action :set_article, only: [:edit, :show, :update, :destroy, :like]
+  before_action :authenticate_user, only:[:new, :create, :edit, :update, :destroy, :like]
   before_action only: [:edit, :update, :destroy] do
     authorize_user(@article.user)
   end
@@ -52,6 +52,16 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       @article.destroy
       format.html { redirect_to articles_path, notice: "Article was deleted" }
+    end
+  end
+
+  def like
+    respond_to do |format|
+      if current_user.voted_for? @article
+        @article.unliked_by current_user
+      else
+        @article.liked_by current_user
+      end
     end
   end
 

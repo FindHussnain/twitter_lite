@@ -5,7 +5,14 @@
   </div>
 </div>
 <h4 align="center"><%= @user.username %>'s articles</h4>
-<%= render 'shared/article', obj: @user.articles %>
+<div>
+  <% if @current_user && @current_user.following?(@user) %>
+    <center><%= button_to "following", {action: 'unfollow', id: @user.id}, method: 'post', class: 'btn btn-danger' %></center>
+  <% elsif @current_user != @user && @current_user%>
+    <center><%= button_to "follow", follow_user_path(@user), class: 'btn btn-success' %></center>
+  <% end %>
+</div>
+<%= render 'shared/article', obj: @user_articles %>
 <div align="center">
-  <%= raw pagy_bootstrap_nav(@pagy) %>
+  <%= raw pagy_bootstrap_nav(@pagy) if @user.articles.count > 10%>
 </div>

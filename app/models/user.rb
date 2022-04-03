@@ -10,7 +10,7 @@ class User < ApplicationRecord
   format: { with: VALID_EMAIL_REGEX }
   before_save { self.email = email.downcase }
   has_secure_password
-
+  acts_as_voter
   def assign_default_role
     self.add_role :visitor if self.roles.blank?
   end

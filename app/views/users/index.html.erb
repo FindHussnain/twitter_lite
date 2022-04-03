@@ -11,7 +11,7 @@
             <li><small><%= pluralize(user.articles.count, "article") if user.articles %></small></li>
             <% if logged_in? && (current_user == user || current_user.has_role?(:admin)) %>
             <li><%= button_to "Destroy", user_path(user),method: :delete, data: { action: 'click->confirmation#confirm' } %></li>
-            <li><%= link_to "Edit", edit_user_path(user) %></li>
+            <li><%= button_to "Edit", edit_user_path(user) %></li>
             <% end %>
           </div>
         </div>
