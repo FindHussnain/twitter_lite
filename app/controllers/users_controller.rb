@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         flash[:notice] = "Your account was updated successfully"
-        format.html { redirect_to articles_path }
+        format.html { redirect_to users_path }
       else
         flash[:alert] = @user.errors.full_messages
         format.html { render 'edit', status: :unprocessable_entity }
@@ -38,11 +38,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @user_articles = pagy(@user.articles.all)
+    @pagy, @user_articles = pagy(@user.articles.all, items: 10)
   end
 
   def index
-    @pagy, @users = pagy(User.all)
+    @pagy, @users = pagy(User.all, items: 10)
   end
 
   def destroy

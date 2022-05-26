@@ -14,7 +14,7 @@
   <% end %>
   <h4 class="center description"><strong>Description:</strong></h4>
   <hr>
-  <%= simple_format(@article.description) %>
+  <%= @article.description %>
   <%== @article.tag_list.map {|t| link_to t, tag_path(t)}.join(' ') %>
   <div class="article-actions">
     <div id="like-count">

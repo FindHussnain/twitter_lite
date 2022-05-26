@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :user
+  has_rich_text :description
   acts_as_taggable_on :tags
   acts_as_votable
   # acts_as_taggable_on :programming, :development, :ruby

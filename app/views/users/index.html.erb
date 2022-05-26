@@ -18,12 +18,12 @@
               <center><%= button_to "follow", follow_user_path(user), class: 'btn btn-success' %></center>
            <% end %>
             </li>
-            <li><%= button_to "Edit", edit_user_path(user) %></li>
+            <li><%= link_to "Edit", edit_user_path(user) %></li>
             <% end %>
           </div>
         </div>
       </ul>
     <% end %>
-    <%= pagy_bootstrap_nav(@pagy).html_safe %>
+    <%= pagy_bootstrap_nav(@pagy).html_safe if @users.count >= 10%>
   </div>
 </div>
