@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   end
 
   def index
-    @comments = @article.comments
+    @comments = @article.comments.order(created_at: :desc)
   end
 
   def edit; end

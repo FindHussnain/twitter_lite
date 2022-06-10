@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   rolify
   after_create :assign_default_role
+  has_one_attached :image
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
