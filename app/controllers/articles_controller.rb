@@ -42,7 +42,8 @@ class ArticlesController < ApplicationController
 
   def index
     if params[:tag]
-      @pagy, @articles = pagy(Article.tagged_with(params[:tag].order(created_at: :desc)), items: 10)
+      @pagy, @articles = pagy(Article.tagged_with(params[:tag]), items: 10)
+      @articles = @articles.order(created_at: :desc)
     else
       @pagy, @articles = pagy(Article.all.order(created_at: :desc), items: 10)
     end
