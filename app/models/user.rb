@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: :slugged
   rolify
   after_create :assign_default_role
   has_one_attached :image
