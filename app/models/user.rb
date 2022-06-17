@@ -4,7 +4,7 @@ class User < ApplicationRecord
   rolify
   after_create :assign_default_role
   has_one_attached :image
-  has_many :articles, dependent: :destroy
+  has_many :tweets, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
   validates :username, presence: true, uniqueness: true, length: { minimum: 3, maxmum: 25 }

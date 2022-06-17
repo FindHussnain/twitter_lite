@@ -21,8 +21,8 @@
         </div>
         <div class="col-lg-2">
             <% if logged_in? && current_user == comment.user %>
-              <%= link_to "Edit", edit_article_comment_path( comment.article_id,comment.id ), class: 'btn btn-info btn-xs glyphicon glyphicon-edit' %>
-              <%= link_to "Delete", article_comment_path(comment.article_id ,comment.id), method: :delete, class: 'btn btn-danger glyphicon glyphicon-trash btn-xs' %>
+              <%= link_to "Edit", edit_tweet_comment_path( comment.tweet_id,comment.id ), class: 'btn btn-info btn-xs glyphicon glyphicon-edit' %>
+              <%= link_to "Delete", tweet_comment_path(comment.tweet_id ,comment.id), method: :delete, class: 'btn btn-danger glyphicon glyphicon-trash btn-xs' %>
             <% end %>
         </div>
       </div>

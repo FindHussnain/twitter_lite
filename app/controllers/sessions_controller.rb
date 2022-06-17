@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     respond_to do |format|
-      format.html { redirect_to articles_path, notice: "You have logged out" }
+      format.html { redirect_to tweets_path, notice: "You have logged out" }
     end
   end
 

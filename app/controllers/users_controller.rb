@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       if @user.save
         flash[:notice] = "Welcome to the Twitter Lite #{@user.username}"
         session[:user_id] = @user.id
-        format.html { redirect_to articles_path }
+        format.html { redirect_to tweets_path }
       else
         flash[:alert] = @user.errors.full_messages
         format.html { render 'new', status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @user_articles = pagy(@user.articles.all, items: 10)
+    @pagy, @user_tweets = pagy(@user.tweets.all.order(created_at: :desc), items: 10)
   end
 
   def index

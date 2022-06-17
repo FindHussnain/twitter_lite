@@ -1,0 +1,3 @@
+<% vote_text = current_user&.voted_for?(tweet) ? raw("<i class=\"btn btn-primary  btn-xs \"> #{pluralize(tweet.get_upvotes.size, 'Like')}</i>") : raw("<i class=\"btn btn-secondary glyphicon glyphicon-thumbs-up btn-xs shadow-none\"> Like</i>") %>
+
+<%= button_to vote_text, like_tweet_path(tweet), method: :put, remote: :true %>

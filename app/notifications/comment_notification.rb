@@ -18,13 +18,13 @@ class CommentNotification < Noticed::Base
   # Define helper methods to make rendering easier.
   #
   def message
-    @article = Article.find(params[:comment][:article_id])
+    @tweet = Tweet.find(params[:comment][:tweet_id])
     @comment = Comment.find(params[:comment][:id])
     @user = User.find(@comment.user_id)
-    return "#{@user.email} commented on #{@article.title.truncate(10)}"
+    return "#{@user.email} commented on #{@tweet.title.truncate(10)}"
   end
 
   def url
-    article_path(Article.find(params[:comment][:article_id]))
+    tweet_path(Tweet.find(params[:comment][:tweet_id]))
   end
 end

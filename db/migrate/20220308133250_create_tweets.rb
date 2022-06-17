@@ -1,6 +1,6 @@
-class CreateArticles < ActiveRecord::Migration[7.0]
+class CreateTweets < ActiveRecord::Migration[7.0]
   def change
-    create_table :articles do |t|
+    create_table :tweets do |t|
       t.string :title
       t.text :description
       t.references :user, null: false, foreign_key: true

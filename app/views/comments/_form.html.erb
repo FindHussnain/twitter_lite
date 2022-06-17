@@ -1,4 +1,4 @@
-<%= form_for([@article, @comment], :html => {class: "form-horizontal", role: "form"}) do |f| %>
+<%= form_for([@tweet, @comment], :html => {class: "form-horizontal", role: "form"}) do |f| %>
   <%= f.rich_text_area :body, class: "form-control", placeholder: "Add a Comment", autofocus: true %>
   <%= f.submit class: 'btn btn-success btn-xs' %>
 <% end %>

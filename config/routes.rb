@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  root 'articles#index'
-  get 'tags/:tag', to: 'articles#index', as: :tag
-  resources :articles do
+  root 'tweets#index'
+  get 'tags/:tag', to: 'tweets#index', as: :tag
+  resources :tweets do
     resources :comments, except: [:new, :index]
     member do
-      put 'like' => 'articles#like'
+      put 'like' => 'tweets#like'
     end
   end
   get 'signup', to: 'users#new'
