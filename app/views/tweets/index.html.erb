@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-2">
+  <%= render 'shared/tweet', obj: @tweets %>
+  </div>
+  <div class="col-xs-4">
+    <div class="well ">
+      <% if Tweet.tag_counts %>
+      <h2>Trends for you</h2>
+      <p><%= link_to Tweet.tag_counts.order(:taggings_count)[-1].name, tag_path(Tweet.tag_counts.order(:taggings_count)[-1].name) %></p>
+       <i><%= Tweet.tag_counts.order(:taggings_count)[-1].taggings_count %> Tweets </i>
+      <hr>
+      <p><%= link_to Tweet.tag_counts.order(:taggings_count)[-2].name, tag_path(Tweet.tag_counts.order(:taggings_count)[-2].name) %></p>
+       <i> <%= Tweet.tag_counts.order(:taggings_count)[-2].taggings_count %> Tweets </i>
+      <hr>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div align="center">
+  <%= raw pagy_bootstrap_nav(@pagy) if @tweets.count >= 10 %>
+</div>

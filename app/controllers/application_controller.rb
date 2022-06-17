@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def authorize_user(user)
     if user != current_user && !current_user.admin?
       respond_to do |format|
-        format.html { redirect_to articles_path, alert: "You are elligible, signin with authorize account" }
+        format.html { redirect_to tweets_path, alert: "You are elligible, signin with authorize account" }
       end
     end
   end
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   # def find_trending_tags
-  #   @tags = Article.tag_list
+  #   @tags = Tweet.tag_list
   #   @tagCount = @tags.maximum(:taggings_count)
   #   @tag = @tags.find_by(taggings_count: @tagCount)
   # end
