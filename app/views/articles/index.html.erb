@@ -1,5 +1,19 @@
-<h1 align="center">Listing all articles</h1>
-<%= render 'shared/article', obj: @articles %>
+<div class="row">
+  <div class="col-xs-8">
+    <%= render 'shared/article', obj: @articles %>
+  </div>
+  <div class="col-xs-4">
+    <div class="well ">
+      <h2>Trends for you</h2>
+      <p><%= link_to Article.tag_counts.order(:taggings_count)[-1].name, tag_path(Article.tag_counts.order(:taggings_count).sort[-1].name) %></p>
+       <i> <%= Article.tag_counts.order(:taggings_count)[-1].taggings_count %> Tweets </i>
+      <hr>
+      <p><%= link_to Article.tag_counts.order(:taggings_count)[-2].name, tag_path(Article.tag_counts.order(:taggings_count).sort[-2].name) %></p>
+       <i> <%= Article.tag_counts.order(:taggings_count)[-2].taggings_count %> Tweets </i>
+      <hr>
+    </div>
+  </div>
+</div>
 <div align="center">
   <%= raw pagy_bootstrap_nav(@pagy) if @articles.count >= 10 %>
 </div>

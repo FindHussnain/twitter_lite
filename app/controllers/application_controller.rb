@@ -34,4 +34,11 @@ class ApplicationController < ActionController::Base
     @unread = @notifications.unread
     @read = @notifications.read
   end
+
+  # def find_trending_tags
+  #   @tags = Article.tag_list
+  #   @tagCount = @tags.maximum(:taggings_count)
+  #   @tag = @tags.find_by(taggings_count: @tagCount)
+  # end
+
 end
