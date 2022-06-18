@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post :unfollow
     end
   end
+  get 'users/:id/:tag', to: 'users#index', as: :followers
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'

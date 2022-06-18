@@ -42,7 +42,17 @@ class UsersController < ApplicationController
   end
 
   def index
-    @pagy, @users = pagy(User.all, items: 10)
+    if params[:tag] == "followers"
+      @users = User.friendly.find(params[:id]).followers
+    elsif params[:tag] == "followings"
+      users = User.friendly.find(params[:id]).following_ids
+      users.each_with_index do |id, index|
+        users[index] = User.find(id)
+      end
+      @users = users
+    else
+      @pagy, @users = pagy(User.all, items: 10)
+    end
   end
 
   def destroy

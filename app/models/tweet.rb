@@ -11,5 +11,5 @@ class Tweet < ApplicationRecord
   validates :description, presence: true, length: {minimum: 5}
   validates :user_id, presence: true
   has_noticed_notifications model_name: 'Notification'
-  has_many :notifications, through: :user, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy
 end

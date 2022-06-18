@@ -11,6 +11,10 @@
     <center><%= button_to "follow", follow_user_path(@user), class: 'btn btn-success' %></center>
   <% end %>
 </div>
+<div>
+  <center><%= link_to "Followers", followers_url(@user, "followers"), class: "btn btn-primary xs " %></center>
+  <center><%= link_to "Followings", followers_url(@user, "followings"), class: "btn btn-primary xs " %></center>
+</div>
 <div class="row">
   <div class="col-xs-8 col-xs-offset-2">
     <%= render 'shared/tweet', obj: @user_tweets %>

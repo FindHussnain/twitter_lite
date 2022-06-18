@@ -9,6 +9,9 @@
       <p><%= link_to Tweet.tag_counts.order(:taggings_count)[-1].name, tag_path(Tweet.tag_counts.order(:taggings_count)[-1].name) %></p>
        <i><%= Tweet.tag_counts.order(:taggings_count)[-1].taggings_count %> Tweets </i>
       <hr>
+      <p><%= link_to Tweet.tag_counts.order(:taggings_count)[-2].name, tag_path(Tweet.tag_counts.order(:taggings_count)[-2].name) %></p>
+       <i> <%= Tweet.tag_counts.order(:taggings_count)[-2].taggings_count %> Tweets </i>
+      <hr>
       <% end %>
     </div>
   </div>
