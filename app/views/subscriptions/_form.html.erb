@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for(@subscription, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :name %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.text_field :name, class: "form-control", placeholder: "name of subscription", autofocus: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :description %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.text_area :description, rows: 4, class: "form-control", placeholder: "Description for subscription" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :price %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.number_field :price, min: 0, class: "form-control", placeholder: "Price" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :subscription_type %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.radio_button :subscription_type, 'basic' %>
+          <%= f.label :subscription_type, 'Basic', :value => '0' %>
+          <%= f.radio_button :subscription_type, 'standard' %>
+          <%= f.label :subscription_type, 'standard', :value => '1' %>
+          <%= f.radio_button :subscription_type, 'platinum' %>
+          <%= f.label :subscription_type, 'Platinum', :value => '2' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :number_of_tweets %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.number_field :number_of_tweets, min: 0, class: "form-control", placeholder: "Number of Tweets" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="control-label col-sm-2">
+          <%= f.label :active %>
+        </div>
+        <div class="col-sm-8">
+          <%= f.radio_button :active, true %>
+          <%= f.label :active, 'True', :value => true %>
+          <%= f.radio_button :active, false %>
+          <%= f.label :active, 'False', :value => false %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <%= f.submit class: 'btn btn-success btn-large' %> |
+          <%= link_to 'Back', subscriptions_path , class: 'btn btn-warning btn-large'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

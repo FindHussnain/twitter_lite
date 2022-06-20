@@ -8,17 +8,28 @@
             <li><%= link_to gravatar_for(user), user_path(user) %></li>
             <li class="tweet-title"><%= link_to user.username, user_path(user) %><%="(#{user.roles.pluck(:name).join(", ")})" if !user.roles.blank? %></li>
 
-            <li><small><%= pluralize(user.tweets.count, "tweet") if user.tweets %></small></li>
-            <% if logged_in? && (current_user == user || current_user.has_role?(:admin)) %>
-            <li><%= button_to "Destroy", user_path(user),method: :delete, data: { action: 'click->confirmation#confirm' } %></li>
             <li>
-           <% if @current_user.following?(user) %>
-              <center><%= button_to "following", unfollow_user_path(user), class: 'btn btn-danger' %></center>
-            <% elsif @current_user != user %>
-              <center><%= button_to "follow", follow_user_path(user), class: 'btn btn-success' %></center>
-           <% end %>
+              <small><%= pluralize(user.tweets.count, "tweet") if user.tweets %></small>
             </li>
-            <li><%= link_to "Edit", edit_user_path(user) %></li>
+            <% if logged_in? && (current_user == user || current_user.has_role?(:admin)) %>
+
+                <div style="float: left; width: auto;">
+                  <%= button_to "Destroy", user_path(user),method: :delete, data: { action: 'click->confirmation#confirm' }, class: "btn btn-xs btn-danger" %>
+                </div>
+                <div style="float: left; width: auto;">
+                  <%= link_to "Edit", edit_user_path(user), class: "btn btn-xs btn-primary"%>
+                </div>
+                <div style="float: right;">
+                  <% if @current_user.following?(user) %>
+                    <div style="float: left; width: auto;">
+                      <%= button_to "following", unfollow_user_path(user), class: 'btn btn-xs btn-danger' %>
+                    </div>
+                  <% elsif @current_user != user %>
+                    <div style="float: left; width: auto;">
+                      <%= button_to "follow", follow_user_path(user), class: 'btn btn-xs btn-success' %>
+                    </div>
+                  <% end %>
+                </div>
             <% end %>
           </div>
         </div>

@@ -1,5 +1,6 @@
+<link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
 <div class="row">
-  <div class="col-xs-6 col-xs-offset-2">
+  <div class="col col-xs-6 col-xs-offset-2">
   <%= render 'shared/tweet', obj: @tweets %>
   </div>
   <div class="col-xs-4">
@@ -20,3 +21,4 @@
 <div align="center">
   <%= raw pagy_bootstrap_nav(@pagy) if @tweets.count >= 10 %>
 </div>
+<script src="https://vjs.zencdn.net/7.19.2/video.min.js"></script>

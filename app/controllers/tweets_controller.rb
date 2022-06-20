@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
   before_action only: [:edit, :update, :destroy] do
     authorize_user(@tweet.user)
   end
+  before_action :authenticate_subscription, only: [:new, :create]
 
   def new
     @tweet = Tweet.new

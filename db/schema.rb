@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_16_130452) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_18_165440) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -107,6 +107,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_130452) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.boolean "active"
+    t.float "price"
+    t.integer "subscription_type"
+    t.integer "number_of_tweets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -149,6 +160,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_130452) do
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
+  create_table "user_subscriptions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "subscription_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_user_subscriptions_on_subscription_id"
+    t.index ["user_id"], name: "index_user_subscriptions_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -189,4 +209,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_130452) do
   add_foreign_key "comments", "users"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tweets", "users"
+  add_foreign_key "user_subscriptions", "subscriptions"
+  add_foreign_key "user_subscriptions", "users"
 end

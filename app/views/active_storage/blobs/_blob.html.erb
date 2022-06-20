@@ -1,6 +1,15 @@
 <figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
-  <% if blob.representable? %>
+  <% if blob.image? %>
     <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 350, 350 ] : [ 350, 350 ]) %>
+  <% end %>
+</figure>
+<figure class="attachment attachment--<%= blob.video? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
+  <% if blob.video? %>
+    <%= video_tag url_for(blob.attachable),
+      preload: "auto",
+      controls: "controls",
+      width: 250,
+      height: 250 %>
   <% end %>
 
   <!-- <figcaption class="attachment__caption">

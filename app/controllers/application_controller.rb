@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   def authorize_user(user)
     if user != current_user && !current_user.admin?
       respond_to do |format|
-        format.html { redirect_to tweets_path, alert: "You are elligible, signin with authorize account" }
+        format.html { redirect_to tweets_path, alert: "You are not elligible, signin with authorize account" }
       end
     end
   end
@@ -33,6 +33,22 @@ class ApplicationController < ActionController::Base
     @notifications = Notification.where(recipient: current_user).newest_first.limit(9)
     @unread = @notifications.unread
     @read = @notifications.read
+  end
+
+  def authenticate_admin
+    if !current_user.admin?
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: "You are not elligible, signin with authorize account" }
+      end
+    end
+  end
+
+  def authenticate_subscription
+    if !current_user.user_subscriptions.any?
+      respond_to do |format|
+        format.html { redirect_to subscriptions_path, alert: "Select a subscription"}
+      end
+    end
   end
 
   # def find_trending_tags
