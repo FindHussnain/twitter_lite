@@ -2,6 +2,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:edit, :show, :update, :destroy]
   before_action :authenticate_user, only:[:new, :create, :edit, :update, :destroy]
   before_action :authenticate_admin, only:[:new, :create, :edit, :update, :destroy]
+  before_action :check_user, only: [:new, :create, :edit, :index, :show]
 
   def new
     @subscription = Subscription.new
@@ -54,5 +55,15 @@ private
 
   def subscription_params
     params.require(:subscription).permit(:name, :description, :price, :active, :subscription_type, :number_of_tweets)
+  end
+
+  def check_user
+    if logged_in?
+      if !(current_user.admin? || current_user.editor?)
+        respond_to do |format|
+          format.html { redirect_to login_path, notice: "Login with correct account" }
+        end
+      end
+    end
   end
 end

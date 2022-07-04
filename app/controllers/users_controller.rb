@@ -42,16 +42,33 @@ class UsersController < ApplicationController
   end
 
   def index
+    # byebug
     if params[:tag] == "followers"
-      @users = User.friendly.find(params[:id]).followers
-    elsif params[:tag] == "followings"
-      users = User.friendly.find(params[:id]).following_ids
-      users.each_with_index do |id, index|
-        users[index] = User.find(id)
+      if logged_in? && current_user.admin?
+        @users = User.friendly.find(params[:id]).followers
+      else
+        @users = User.active.friendly.find(params[:id]).followers
       end
-      @users = users
+    elsif params[:tag] == "followings"
+      if logged_in? && current_user.admin?
+        users = User.friendly.find(params[:id]).follows.ids
+        users.each_with_index do |id, index|
+          users[index] = User.find(id)
+        end
+        @users = users
+      else
+        users = User.active.friendly.find(params[:id]).follows.ids
+        users.each_with_index do |id, index|
+          users[index] = User.find(id)
+        end
+        @users = users
+      end
     else
-      @pagy, @users = pagy(User.all, items: 10)
+      if logged_in? && current_user.admin?
+        @pagy, @users = pagy(User.all, items: 10)
+      else
+        @pagy, @users = pagy(User.active, items: 10)
+      end
     end
   end
 
@@ -78,7 +95,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :image, {role_ids: []})
+    params.require(:user).permit(:username, :email, :password, :image, {role_ids: []}, :active)
   end
 
   def set_user

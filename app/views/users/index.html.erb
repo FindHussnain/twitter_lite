@@ -22,7 +22,7 @@
                 <div style="float: right;">
                   <% if @current_user.following?(user) %>
                     <div style="float: left; width: auto;">
-                      <%= button_to "following", unfollow_user_path(user), class: 'btn btn-xs btn-danger' %>
+                      <%= button_to "unfollow", unfollow_user_path(user), class: 'btn btn-xs btn-danger' %>
                     </div>
                   <% elsif @current_user != user %>
                     <div style="float: left; width: auto;">

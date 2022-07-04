@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  scope :active, -> { where(active: true) }
   extend FriendlyId
   friendly_id :username, use: :slugged
   rolify
@@ -10,7 +11,7 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient, dependent: :destroy
   has_many :user_subscriptions, dependent: :destroy
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maxmum: 25 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 3, maxmum: 25 }, format: { with: /\A[a-zA-Z0-9]+\Z/ }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 30 },
   format: { with: VALID_EMAIL_REGEX }

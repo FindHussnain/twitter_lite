@@ -17,7 +17,6 @@
         <li><%= link_to "Tweets", tweets_path %></li>
         <li><%= link_to "Users", users_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "Subscriptions", subscriptions_path if current_user.admin?%></li>
           <li><%= (link_to "Create Tweet", new_tweet_path) if current_user.editor? || current_user.admin? %></li>
           <li><%= link_to "Logout", logout_path, method: :delete%></li>
         <% else %>
@@ -35,7 +34,7 @@
             <li><%= link_to "Signup", signup_path %></li>
             <% end %>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><%= link_to "Subscriptions", subscriptions_path if( logged_in? && (current_user.editor? || current_user.admin?)) %></li>
           </ul>
         </li>
       </ul>

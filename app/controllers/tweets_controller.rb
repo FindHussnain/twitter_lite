@@ -43,10 +43,18 @@ class TweetsController < ApplicationController
 
   def index
     if params[:tag]
-      @pagy, @tweets = pagy(Tweet.tagged_with(params[:tag]), items: 10)
+      if logged_in? && current_user.admin?
+        @pagy, @tweets = pagy(Tweet.tagged_with(params[:tag]), items: 10)
+      else
+        @pagy, @tweets = pagy(Tweet.active.tagged_with(params[:tag]), items: 10)
+      end
       @tweets = @tweets.order(created_at: :desc)
     else
-      @pagy, @tweets = pagy(Tweet.all.order(created_at: :desc), items: 10)
+      if logged_in? && current_user.admin?
+        @pagy, @tweets = pagy(Tweet.order(created_at: :desc), items: 10)
+      else
+        @pagy, @tweets = pagy(Tweet.active.order(created_at: :desc), items: 10)
+      end
     end
   end
 
@@ -70,7 +78,7 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:title, :description, :user_id, :tag_list)
+    params.require(:tweet).permit(:title, :description, :user_id, :tag_list, :active)
   end
 
   def set_tweet

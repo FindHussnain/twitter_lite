@@ -15,10 +15,12 @@
           </div>
         </div>
         <div class="tweet-actions">
+          <% if logged_in? && (current_user == tweet.user || current_user.admin?) %>
           <div style="float: left; width: auto;">
             <%= button_to "Delete", tweet_path(tweet),method: :delete, data: { action: 'click->confirmation#confirm' },class: 'btn btn-xs btn-danger' %>
           </div>
           <%= link_to "Edit", edit_tweet_path(tweet), class: "btn btn-xs btn-primary" %>
+          <% end %>
         </div>
       </div>
   <% end %>

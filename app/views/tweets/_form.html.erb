@@ -25,6 +25,18 @@
       <%= f.rich_text_area :description, rows: 10, class: "form-control", placeholder: "Body of tweet" %>
      </div>
     </div>
+    <% if current_user.admin? %>
+      <div class="form-group">
+       <div class="control-label col-sm-2">
+        <%= f.label :active %>
+       </div>
+       <div class="col-sm-8">
+         <%= f.radio_button :active, true %>
+         <%= f.label :active, 'True', :value => true %>
+         <%= f.radio_button :active, false %>
+         <%= f.label :active, 'False', :value => false %>
+      </div>
+    <% end %>
     <div class="form-group">
      <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit class: 'btn btn-success btn-large' %> |

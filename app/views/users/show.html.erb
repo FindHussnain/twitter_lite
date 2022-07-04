@@ -3,17 +3,23 @@
     <center><%= gravatar_for @user, size: 150%></center>
   </div>
 </div>
+<center>
+  <ul>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">follow_detail <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <% if @current_user && @current_user.following?(@user) %>
+          <li><center><%= button_to "unfollow", {action: 'unfollow', id: @user.id}, method: 'post', class: 'btn btn-secondary' %></center></li>
+        <% elsif @current_user != @user && @current_user%>
+          <li><center><%= button_to "follow", follow_user_path(@user), class: 'btn btn-secondary' %></center></li>
+        <% end %>
+        <li><%= link_to "Followers", followers_url(@user, "followers"), class: "btn btn-secondary" %></li>
+        <li><%= link_to "Followings", followers_url(@user, "followings"), class: "btn btn-secondary " %></li>
+      </ul>
+    </li>
+  </ul>
+</center>
 <h4 align="center"><%= @user.username %>'s tweets</h4>
-<div>
-  <% if @current_user && @current_user.following?(@user) %>
-    <center><%= button_to "following", {action: 'unfollow', id: @user.id}, method: 'post', class: 'btn btn-danger' %></center>
-  <% elsif @current_user != @user && @current_user%>
-    <center><%= button_to "follow", follow_user_path(@user), class: 'btn btn-success' %></center>
-  <% end %>
-</div>
-<div>
-  <center><%= link_to "Followers", followers_url(@user, "followers"), class: "btn btn-primary xs " %></center>
-  <center><%= link_to "Followings", followers_url(@user, "followings"), class: "btn btn-primary xs " %></center>
 </div>
 <div class="row">
   <div class="col-xs-8 col-xs-offset-2">

@@ -1,5 +1,7 @@
 <div data-controller="confirmation">
+  <% if current_user.admin? %>
   <center><%= link_to "Create Subscription", new_subscription_path, class: 'btn btn-xs btn-primary' %></center>
+  <% end %>
   <% @subscriptions.each do |subscription| %>
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4">
